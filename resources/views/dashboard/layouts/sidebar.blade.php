@@ -10,19 +10,13 @@
         <li class="nav-item">
           <a class="nav-link {{ Request::is('dashboard/posts*') ? 'active' : '' }}" href="/dashboard/posts">
             <span data-feather="file-text"></span>
-            Blog Berita
+            Blog Saya
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('dashboard/tabungan*') ? 'active' : '' }}" href="/dashboard/tabungan">
-            <span data-feather="dollar-sign"></span>
-            Data Tabungan
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {{ Request::is('dashboard/nabung*') ? 'active' : '' }}" href="/dashboard/nabung">
-            <span data-feather="dribbble"></span>
-            Mari Nabung
+          <a class="nav-link {{ Request::is('dashboard/siswa*') ? 'active' : '' }}" href="/dashboard/siswa">
+            <span data-feather="file-text"></span>
+            Data Siswa
           </a>
         </li>
     </div>

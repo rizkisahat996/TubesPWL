@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -33,6 +34,11 @@ Route::get('/categories', function(){
     ]);
 });
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
+
 Route::get('/posts', [PostController::class, 'index']);
 
 //halaman single post
@@ -56,11 +62,13 @@ Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'check
 
 
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
-Route::resource('/dashboard/nabung', DashboardNabungController::class)->middleware('auth');
-Route::resource('/dashboard/tabungan', DashboardTabunganController::class)->middleware('auth');
+Route::resource('/dashboard/siswa', SiswaController::class)->middleware('auth');
 
 Route::resource('/berita', BeritaController::class);
 
 Route::get('/a', function(){
     return view('berita.post');
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
