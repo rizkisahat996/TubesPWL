@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardPostController;
+use Illuminate\Support\Facades\Auth;
 
 
 /*
@@ -21,22 +22,9 @@ use App\Http\Controllers\DashboardPostController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Auth::routes();
 
-Route::get('/about', function () {
-    return view('about', [
-        "title" => "About",
-    ]);
-});
-
-Route::get('/contact', function () {
-    return view('contact', [
-        "title" => "Contact",
-        "whatsapp" => "083115630741"
-    ]);
-});
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/categories', function(){
     return view('categories', [
@@ -50,15 +38,15 @@ Route::get('/posts', [PostController::class, 'index']);
 //halaman single post
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+// Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 
-Route::post('/login', [LoginController::class, 'authenticate']);
+// Route::post('/login', [LoginController::class, 'authenticate']);
 
-Route::post('/logout', [LoginController::class, 'logout']);
+// Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
+// Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 
-Route::post('/register', [RegisterController::class, 'store']);
+// Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/dashboard', function(){
     return view('dashboard.index');
