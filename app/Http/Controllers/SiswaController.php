@@ -15,7 +15,13 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        return view('dashboard.siswa.index');
+        $user = User::all();
+        if(request('search')){
+            $user->where('name', 'like', '%' . request('search') . '%');
+        }
+        return view('dashboard.siswa.index', [
+            'users' => $user
+        ]);
     }
 
     /**
