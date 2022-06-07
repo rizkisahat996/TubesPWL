@@ -11,18 +11,6 @@
 </div>
 @endif
 
-<div class="row justify-content-start mb-3">
-  <div class="col-md-6">
-    <form action="{{ route('dashboard.siswa.index') }}" method="GET" role="search">
-      @csrf
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Search" name="search" value="{{ request('search') }}">
-        <button class="btn btn-dark" type="submit" id="button-addon2">Search</button>
-      </div>
-    </form>
-  </div>
-</div>
-
 <div class="table-responsive col-lg-10">
   <table class="table table-striped table-sm">
     <thead>
