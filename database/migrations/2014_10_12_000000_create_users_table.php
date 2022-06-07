@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer('saldo')->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->enum('status', ['siswa', 'admin'])->default('siswa');

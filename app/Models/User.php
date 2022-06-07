@@ -22,6 +22,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'saldo',
     ];
 
     /**
@@ -46,5 +47,10 @@ class User extends Authenticatable
     public function Post()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class);
     }
 }

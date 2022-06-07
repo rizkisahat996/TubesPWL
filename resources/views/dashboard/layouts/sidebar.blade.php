@@ -13,11 +13,13 @@
             Blog Saya
           </a>
         </li>
+        @if (auth()->user()->status == 'admin')
         <li class="nav-item">
           <a class="nav-link {{ Request::is('dashboard/siswa*') ? 'active' : '' }}" href="/dashboard/siswa">
             <span data-feather="file-text"></span>
             Data Siswa
           </a>
         </li>
+        @endif
     </div>
 </nav>
