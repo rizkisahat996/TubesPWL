@@ -19,7 +19,7 @@ class DashboardPostController extends Controller
     public function index()
     {
         return view('dashboard.posts.index', [
-            'posts' => Post::where('user_id', auth()->user()->id)->get()
+            'posts' => Post::get()
         ]); 
     }
 
@@ -30,9 +30,7 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
-        return view('dashboard.posts.create', [
-            'categories' => Category::all()
-        ]);
+        return view('dashboard.posts.create');
     }
 
     /**
@@ -46,7 +44,6 @@ class DashboardPostController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'slug' => 'required|unique:posts',
-            'category_id' => 'required',
             'image' => 'image|file|max:5120kb',
             'body' => 'required'
         ]);
@@ -55,7 +52,6 @@ class DashboardPostController extends Controller
             $validatedData['image'] = $request->file('image')->store('post-images');
         }
 
-        $validatedData['user_id'] = auth()->user()->id;
         $validatedData['exert'] = Str::limit(strip_tags($request->body), 200);
 
         Post::create($validatedData);
@@ -71,9 +67,6 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
-        if($post->author->id !== auth()->user()->id) {
-            abort(403);
-       }
         return view('dashboard.posts.show', [
             'post' => $post
         ]);
@@ -87,12 +80,8 @@ class DashboardPostController extends Controller
      */
     public function edit(Post $post)
     {
-        if($post->author->id !== auth()->user()->id) {
-            abort(403);
-       }
         return view('dashboard.posts.edit', [
             'post' => $post,
-            'categories' => Category::all()
         ]);
     }
 
@@ -107,7 +96,6 @@ class DashboardPostController extends Controller
     {
         $rules = ([
             'title' => 'required|max:255',
-            'category_id' => 'required',
             'image' => 'image|file|max:5120kb',
             'body' => 'required'
         ]);
@@ -126,8 +114,7 @@ class DashboardPostController extends Controller
             }
             $validatedData['image'] = $request->file('image')->store('post-images');
         }
-
-        $validatedData['user_id'] = auth()->user()->id;
+        
         $validatedData['exert'] = Str::limit(strip_tags($request->body), 200);
 
         Post::where('id', $post->id)
